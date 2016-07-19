@@ -1,12 +1,11 @@
 {
-  "name": "webpack-starter",
+  "name": "melon-webpack-demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node server.js",
-    "build": "webpack --config webpack.prod.js"
+    "start": "babel-node server.js"
   },
   "author": "",
   "license": "ISC",

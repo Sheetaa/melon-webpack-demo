@@ -5,9 +5,11 @@
 
 import React from 'react';
 import {render} from 'react-dom';
+import Title from 'melon/Title';
 import Button from 'melon/Button';
 import Icon from 'melon/Icon';
 import Dialog from 'melon/Dialog';
+import Progress from 'melon/Progress';
 
 import './index.styl';
 
@@ -16,7 +18,7 @@ class Home extends React.Component {
     constructor() {
         super();
         this.state = {
-            dialog1: false
+            dialog: false
         };
     }
 
@@ -24,31 +26,58 @@ class Home extends React.Component {
 
         const iconStyle = {
             fontSize: 64,
-            display: 'block'
+            display: 'inline-block'
         };
-
-        const icon = 'refresh';
 
         return (
             <div>
-                <Button label='default' />
-                <Icon icon={icon} title={icon} style={iconStyle}/>
-                <Button onClick={this.onShow.bind(this, 1)}>弹出窗口</Button>
-                <Dialog open={this.state.dialog1} onHide={this.onHide.bind(this, 1)}>Hello</Dialog>
+                <Title level={3}>按钮</Title>
+                <Button variants={['raised']}>default</Button>
+                <Button variants={['raised', 'primary']}>primary</Button>
+                <Button variants={['raised', 'secondery']}>secondery</Button>
+                <Button variants={['raised', 'success']}>success</Button>
+                <Button variants={['raised', 'info']}>info</Button>
+                <Button variants={['raised', 'warning']}>warning</Button>
+                <Button variants={['raised', 'danger']}>danger</Button>
+
+                <Title level={3}>图标</Title>
+                <Icon icon={'refresh'} title={'refresh'} style={iconStyle}/>
+                <Icon icon={'watch'} title={'watch'} style={iconStyle}/>
+                <Icon icon={'train'} title={'train'} style={iconStyle}/>
+                <Icon icon={'update'} title={'update'} style={iconStyle}/>
+
+                <Title level={3}>弹窗</Title>
+                <Button variants={['raised', 'primary']} onClick={this.onShow.bind(this)}>弹出窗口</Button>
+                <Dialog open={this.state.dialog} onClick={this.onHide.bind(this)}>Hello</Dialog>
+
+                <Title level={3}>Progress</Title>
+                <div className="row">
+                    <Title level={4}>Linear</Title>
+                    <Progress mode="indeterminate" />
+                </div>
+
+                <div className="row">
+                    <Title level={4}>Circle</Title>
+                    <Progress mode="indeterminate" shape="circle" size="xxl" />
+                </div>
             </div>
         );
     }
 
-    onShow(i) {
+    onShow() {
         this.setState({
-            [`dialog${i}`]: true
+            dialog: true
         });
     }
 
     onHide(i) {
         this.setState({
-            [`dialog${i}`]: false
+            dialog: false
         });
+    }
+
+    onBeforeChange({selectedIndex}) {
+        console.log('你选择了' + selectedIndex);
     }
 }
 
